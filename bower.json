@@ -1,0 +1,8 @@
+{
+    "name": "flop",
+    "dependencies": {
+        "datatables": "1.10.7",
+        "foundation": "zurb/bower-foundation#5.5.2"
+    }
+}
+

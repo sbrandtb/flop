@@ -1,0 +1,21 @@
+{% extends 'dashboard/base.html' %}
+
+{% load floppyforms i18n %}
+
+{% block title %}{{ block.super }} - Login{% endblock %}
+
+{% block breadcrumbs %}{{ block.super }}<a href="#" class="current">Login</a>{% endblock %}
+
+{% block content %}
+	<h2>{% trans 'Log into FLOP' %}</h2>
+	<div class="row">
+		<form method="post" action="{% url 'dashboard:login' %}">
+			<input type="hidden" name="next" value="{{ next }}">
+			{% csrf_token %}
+			{% form form %}
+			<div class="large-12 columns">
+				<input class="small right button" type="submit" value="Login">
+			</div>
+		</form>
+	</div>
+{% endblock %}

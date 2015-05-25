@@ -1,0 +1,8 @@
+{% if errors %}
+	<small class="error">
+		{% for error in errors %}
+			{% if not forloop.first %}<br>{% endif %}
+			{{ error|escape }}
+		{% endfor %}
+	</small>
+{% endif %}

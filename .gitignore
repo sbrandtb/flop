@@ -49,9 +49,20 @@ coverage.xml
 
 # Django stuff:
 *.log
+static/
 
 # Sphinx documentation
 docs/_build/
 
 # PyBuilder
 target/
+
+# PyCharm
+.idea/
+
+# Frontend Stuff
+bower_components/
+node_modules/
+
+# Do never commit...
+flop/local_settings.py

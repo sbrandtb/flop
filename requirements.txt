@@ -1,0 +1,6 @@
+Django==1.8.2
+django-floppyforms==1.4.1
+Unipath==1.1
+
+# 0.8 is missing Django 1.8 support and no release has been made since then
+git+https://github.com/sbrandtb/django-configurations.git@0.9-unofficial

@@ -1,0 +1,58 @@
+{% load i18n staticfiles %}
+
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}> <!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}{{ CON_NAME }} FLOP{% endblock %}</title>
+
+	<link rel="stylesheet" href="{% static 'css/normalize.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/flop.min.css' %}" />
+	{% block additional_css %}{% endblock %}
+	<script src="{% static 'js/modernizr.js' %}"></script>
+</head>
+<body>
+	<div class="row">
+		<div class="large-12 columns">
+			<nav class="top-bar" data-topbar>
+				<ul class="title-area">
+					<li class="name"><h1><a href="{% url 'dashboard:index' %}">Flop <small>Food Logistics and Ordering Platform</small></a></h1></li>
+					<li class="toggle-topbar menu-icon"><a href="#">{% trans 'Menü' %}</a></li>
+				</ul>
+				<section class="top-bar-section">
+					<ul class="right">
+						{% if user.is_authenticated %}
+							<li class="divider"></li>
+							<li><a href="#" class="caption">{% blocktrans %}Logged in as {{ user }}{% endblocktrans %}</a></li>
+							<li class="divider"></li>
+							<li class="has-form"><a href="{% url 'dashboard:logout' %}" class="button">{% trans 'Logout' %}</a></li>
+						{% endif %}
+					</ul>
+				</section>
+			</nav>
+			{% if messages %}
+				<div class="messages">
+					{% for message in messages %}
+						<div data-alert class="alert-box {{ message.tags }}">
+						{{ message }}
+						  <a href="#" class="close">&times;</a>
+						</div>
+					{% endfor %}
+				</div>
+				{% endif %}
+				<nav class="breadcrumbs">
+					<a href="{% url 'dashboard:index' %}">Dashboard</a>
+					{% block breadcrumbs %}{% endblock %}
+				</nav>
+			{% block content %}{% endblock %}
+		</div>
+	</div>
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/foundation.min.js' %}"></script>
+	{% block additional_js %}{% endblock %}
+	<script src="{% static 'js/flop.min.js' %}"></script>
+	<script>$(document).foundation();</script>
+</body>
+</html>

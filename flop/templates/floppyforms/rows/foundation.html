@@ -1,0 +1,52 @@
+{% load floppyforms %}
+
+{% block row %}
+	{% for field in fields %}
+		<div class="large-{{ width|default:12 }} columns{% if field.errors %} error{% endif %}{% if field.help_text %} has-help{% endif %}">
+			{% with classes=field.css_classes label=label|default:field.label help_text=help_text|default:field.help_text %}
+				{% block label %}
+					{% if label %}
+						{% if field|id %}<label for="{{ field|id }}">{% endif %}{{ label }}{% if field|id %}</label>{% endif %}
+					{% endif %}
+				{% endblock %}
+				{% block field %}
+					<div class="row collapse">
+						{% block prefix_outer %}
+							{% if width_prefix %}
+								<div class="small-{{ width_prefix }} columns">
+									{% block prefix_inner %}
+										<span class="prefix">{{ prefix }}</span>
+									{% endblock %}
+								</div>
+							{% endif %}
+						{% endblock %}
+
+						<div class="small-{{ width_field|default:12 }} columns">
+							{% block widget %}{% formfield field %}{% endblock %}
+						</div>
+
+						{% block postfix_outer %}
+							{% if width_postfix %}
+								<div class="small-{{ width_postfix }} columns">
+									{% block postfix_inner %}
+										<span class="postfix">{{ postfix }}</span>
+									{% endblock %}
+								</div>
+							{% endif %}
+						{% endblock %}
+					</div>
+
+					{% block errors %}{% include "floppyforms/errors.html" with errors=field.errors %}{% endblock %}
+					{% block help_text %}{% if field.help_text %}
+						<p class="help_text">{{ field.help_text }}</p>
+					{% endif %}{% endblock %}
+					{% block hidden_fields %}
+						{% for field in hidden_fields %}
+							{{ field.as_hidden }}
+						{% endfor %}
+					{% endblock %}
+				{% endblock %}
+			{% endwith %}
+		</div>
+	{% endfor %}
+{% endblock %}
